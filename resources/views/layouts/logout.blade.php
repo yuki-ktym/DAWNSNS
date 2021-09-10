@@ -31,3 +31,5 @@
     <script src="JavaScriptファイルのURL"></script>
 </body>
 </html>
+
+<!-- ログアウト中のビュー -->

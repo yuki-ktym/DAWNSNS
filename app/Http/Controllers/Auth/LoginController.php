@@ -20,7 +20,9 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
+    use AuthenticatesUsers{
+        logout as performLogout;
+    }
 
     /**
      * Where to redirect users after login.
@@ -38,7 +40,7 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-    
+
     public function login(Request $request){
         if($request->isMethod('post')){
             $data=$request->only('mail','password');
@@ -51,11 +53,11 @@ class LoginController extends Controller
         return view("auth.login");
     }
 
-    // public function logout(Request $request)
-    // {
-    //     return redirect('/login');
-    // }
-
-    // AuthenticatesUsers.phpの遷移先をloginに変更済
+    public function logout(Request $request)
+    {
+        $this->performLogout($request);
+        return redirect('/login');// ここを好きな遷移先に変更する。
+    }
+    // ログアウトするとエラー、更新するとTOPに遷移する、なぜ？修正できる？
 
 }

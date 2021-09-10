@@ -25,7 +25,7 @@
         <h1><a><img src="images/logo.png"></a></h1>
             <div id="">
                 <div id="">
-                    <p><?php $user=Auth::user();?>{{ $user->username }}さん<img src="images/arrow.png"></p>
+                    <p><img src="images/arrow.png"><?php $user=Auth::user();?>{{ $user->username }}さん</p>
                 <div>
                 <ul>
                     <li><a href="/top">ホーム</a></li>
@@ -37,11 +37,13 @@
     </header>
     <div id="row">
         <div id="container">
+
             @yield('content')
+<!--親-->
         </div >
         <div id="side-bar">
             <div id="confirm">
-                <p>〇〇さんの</p>
+                <p><?php $user=Auth::user();?><img src="images/arrow.png">{{ $user->username }}さんの</p>
                 <div>
                 <p>フォロー数</p>
                 <p>〇〇名</p>
