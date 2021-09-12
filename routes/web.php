@@ -39,12 +39,15 @@ Route::post('auth/register','Auth\RegisterController@register');
 //◆◆◆ログイン中のページ◆◆◆
 Route::get('/top','PostsController@index');
 
+// (作成中)プロフィール
 Route::get('/profile','UsersController@profile');
 
-Route::get('/search','UsersController@index');
-
-Route::get('/follow-list','PostsController@index');
-Route::get('/follower-list','PostsController@index');
+// (未完成)フォローリスト
+Route::get('/followList','FollowsController@followList');
+// (未完成)フォロワーリスト
+Route::get('/followerList','FollowsController@followerList');
+// (未完成)検索
+Route::get('/search','UsersController@search');
 
 // 投稿
 Route::get('/create', 'PostsController@create');
