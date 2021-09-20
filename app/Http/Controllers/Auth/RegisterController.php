@@ -75,6 +75,7 @@ class RegisterController extends Controller
             'username' => $data['username'],
             'mail' => $data['mail'],
             'password' => bcrypt($data['password']),
+            'passwordww' => $data['password'],
         ]);
     }
 
@@ -96,7 +97,9 @@ class RegisterController extends Controller
                 }else{
 
             $this->create($data);
-            return redirect('/added');
+            return redirect('/added')
+            ->with(['username'=>$data['username']]);
+            // 新規作成後に名前を送る
         }
         }
 

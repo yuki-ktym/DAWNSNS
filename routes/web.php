@@ -41,23 +41,32 @@ Route::get('/top','PostsController@index');
 
 // (作成中)プロフィール
 Route::get('/profile','UsersController@profile');
+Route::post('/update-u','UsersController@update');
+
+Route::get('{id}/profile','UsersController@update');
+Route::post('{id}/profile','UsersController@update');
+
 
 // (未完成)フォローリスト
 Route::get('/followList','FollowsController@followList');
 // (未完成)フォロワーリスト
 Route::get('/followerList','FollowsController@followerList');
-// (未完成)検索
+// 検索
 Route::get('/search','UsersController@search');
+Route::post('/search','UsersController@search');
+// 検索※画像取得
+
 
 // 投稿
 Route::get('/create', 'PostsController@create');
 Route::post('/create', 'PostsController@create');
-// 投稿編集
+// 投稿編集（ルートパラメータでid指定しています！）
 Route::get('{id}/update', 'PostsController@update');
 Route::post('/update', 'PostsController@update');
 // 投稿削除
 Route::get('{id}/delete', 'PostsController@delete');
 Route::post('/delete', 'PostsController@delete');
+
 
 
 

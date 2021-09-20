@@ -1,33 +1,42 @@
 @extends('layouts.login')
 
 @section('content')
-<h2>（プロフィール）</h2>
-    {!! Form::open(['url' => 'profile']) !!}
 
+
+    {!! Form::open(['url' => '/update-u','files'=>'true']) !!}
+    {!! Form::hidden('id', $userlist->id) !!}
 <!-- 名前 -->
     {{ Form::label('UserName') }}
-    {{ Form::text('username',null,['class' => 'input']) }}
+    {{ Form::text('username',$userlist->username,['required','class' => '']) }}
+    <br>
 <!-- メール -->
     {{ Form::label('MailAdress') }}
-    {{ Form::text('mail',null,['class' => 'input']) }}
-<!-- パスワード -->
+    {{ Form::text('mail',$userlist->mail,['required','class' => '']) }}
+    <br>
+<!-- パスワード（編集不可※readonly、ここは入力欄ではなくて表示しているだけ）-->
     {{ Form::label('Password') }}
-    {{ Form::text('password',null,['class' => 'input']) }}
-    <!-- ここのパスワードは編集不可、表示してあるだけ -->
+    {{ Form::input('password','password',$userlist->password,['required','class' =>'','readonly']) }}
+    <br>
 <!-- 新しいパスワード -->
-    {{ Form::label('new Passeord') }}
-    {{ Form::text('password',null,['class' => 'input']) }}
+    {{ Form::label('new Password') }}
+    {{ Form::input('password','newPassword',null,['']) }}
+    <br>
 <!-- 自己紹介 -->
     {{ Form::label('Bio') }}
-    {{ Form::text('bio',null,['class' => 'input']) }}
+    {{ Form::textarea('bio',$userlist->bio,['','class' => '']) }}
+    <!-- 鉤括弧で行の大きさ変えられる -->
+    <br>
     <!-- 編集任意 -->
-<!-- 画像 -->
+<!-- 画像（ユーザーアイコン用の画像、任意）-->
     {{ Form::label('Icon Image') }}
-    {{ Form::text('images',null,['class' => 'input']) }}
+    {{ Form::file('images') }}
+    <br>
     <!-- 編集任意 -->
 
-    <!-- FORMファザードでは初期値を入れられない？？ -->
+    <!-- FORMファザードでは初期値を入れられない？？ ＝＞入れられる！$postlist->postsを（）に入れる-->
 
     {!! Form::submit('更新') !!}
     {!! Form::close() !!}
+
+
 @endsection

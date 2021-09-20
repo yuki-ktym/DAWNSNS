@@ -12,11 +12,7 @@ $(function () {
         return false;
       });
     });
-    $('.modalClose,.modal-main,.modal-bg').on('click', function () {
-      $('.js-modal').fadeOut();
-    //   ここで編集ボタンを押したらアップデートされるようにする
-      return false;
-    });
+
   });
 
 
