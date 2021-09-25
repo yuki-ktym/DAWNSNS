@@ -2,6 +2,9 @@
 
 @section('content')
 
+@foreach ($errors->all() as $error)
+  <li>{{$error}}</li>
+@endforeach
 
     {!! Form::open(['url' => '/update-u','files'=>'true']) !!}
     {!! Form::hidden('id', $userlist->id) !!}

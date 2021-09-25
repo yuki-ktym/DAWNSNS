@@ -59,9 +59,9 @@ class PostsController extends Controller
             ->where('id', $id)
             // 指定する（postsテーブルのidと,フォームから送られてきたIDが一致する箇所の投稿内容を変更する）
             ->delete();
-            // 削除する命令ーーーー
+            // 削除する命令ーーー
         return redirect('/top');
-        // topへ遷移ーーーー
+        // topへ遷移ーーー
     }
 
 }

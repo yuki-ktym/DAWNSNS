@@ -51,6 +51,10 @@ Route::post('{id}/profile','UsersController@update');
 Route::get('/followList','FollowsController@followList');
 // (未完成)フォロワーリスト
 Route::get('/followerList','FollowsController@followerList');
+// フォローフォロワーカウント(ビューに直接入力した)
+// Route::get('/login','FollowsController@followCount');
+
+
 // 検索
 Route::get('/search','UsersController@search');
 Route::post('/search','UsersController@search');

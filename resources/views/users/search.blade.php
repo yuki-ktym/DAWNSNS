@@ -16,6 +16,8 @@
  <tr>
      <td><img src="images/{{$person->images}}"></td>
     <td>{{$person->username}}</td>
+    <td><button href="" class="unFollows-btn">フォローをはずす</button></td>
+    <td><button href="/follows/{{$person->id}}/followUs" class="follows-btn">フォローする</button></td>
 </tr>
 @endforeach
 </table>
