@@ -52,13 +52,13 @@
                 <p><?php $user=Auth::user();?><img src="images/arrow.png">{{ $user->username }}さんの</p>
                 <div>
                 <p>フォロー数</p>
-                <p><?php $id = \Auth::id(); $followCount=\DB::table('follows')->where('follow',$id)->count(); ?>{{ $followCount }}名</p>
+                <p><?php $id = \Auth::id(); $followerCount=\DB::table('follows')->where('follower',$id)->count(); ?>{{ $followerCount }}名</p>
                 <!-- フォロー数が表示できない -->
                 </div>
                 <p class="btn"><a href="/followList">フォローリスト</a></p>
                 <div>
                 <p>フォロワー数</p>
-                <p><?php $id = \Auth::id(); $followerCount=\DB::table('follows')->where('follower',$id)->count(); ?>{{ $followerCount }}名</p>
+                <p><?php $id = \Auth::id(); $followCount=\DB::table('follows')->where('follow',$id)->count(); ?>{{ $followCount }}名</p>
                 <!-- フォロワー数が表示できない、直接記述すると表示される↑ -->
                 </div>
                 <p class="btn"><a href="/followerList">フォロワーリスト</a></p>

@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
 class UsersController extends Controller
@@ -12,7 +13,7 @@ class UsersController extends Controller
     //フォームのへ表示する役割
     public function profile()
     {
-        $userlist = \DB::table('users')
+        $userlist = DB::table('users')
             ->where('id', Auth::id())
             ->first();
 
@@ -52,13 +53,14 @@ class UsersController extends Controller
 
     public function update(Request $request)
     {
-        $id = \Auth::id();
+        $id = Auth::id();
         $username = $request->input('username');
         $mail = $request->input('mail');
         $password = $request->input('newPassword');
         $bio = $request->input('bio');
         $file = $request->file('images');
 
+// ①パスワードとファイルが入力されていた場合、バリデーション後、ファイルの名前と
         if (isset($password) && isset($file)) {
             $data = $request->input();
             $validator = $this->validator($data);
@@ -70,7 +72,7 @@ class UsersController extends Controller
                 $fileName = $file->getClientOriginalName();
                 $file->storeAs('images', $fileName, 'public_uploads');
                 // ↑↑↑引数(フォルダパス名、ファイル名、ディスク名)↑↑↑画像を任意の名前をつけて保存
-                \DB::table('users')
+                DB::table('users')
                     ->where('id', $id)
                     ->update([
                         'username' => $username,
@@ -83,6 +85,7 @@ class UsersController extends Controller
 
                 return redirect('/profile');
             }
+// ②パスワードのみとファイルのみの場合、それ以外が最後
         } elseif (isset($password)) {
             $data = $request->only('username', 'mail', 'bio', 'newPassword');
             $validator = $this->validator($data);
@@ -91,7 +94,7 @@ class UsersController extends Controller
                     ->withErrors($validator)
                     ->withInput();
             } else {
-                \DB::table('users')
+                DB::table('users')
                     ->where('id', $id)
                     ->update([
                         'username' => $username,
@@ -113,7 +116,7 @@ class UsersController extends Controller
             } else {
                 $fileName = $file->getClientOriginalName();
                 $file->storeAs('images', $fileName, 'public_uploads');
-                \DB::table('users')
+                DB::table('users')
                     ->where('id', $id)
                     ->update([
                         'username' => $username,
@@ -133,7 +136,7 @@ class UsersController extends Controller
                     ->withErrors($validator)
                     ->withInput();
             } else {
-                \DB::table('users')
+                DB::table('users')
                     ->where('id', $id)
                     ->update([
                         'username' => $username,
@@ -154,7 +157,7 @@ class UsersController extends Controller
         // 検索ワード受け取り
         $userSearch = $request->input('userSearch');
         // データベース接続
-        $user = \DB::table('users');
+        $user = DB::table('users');
 
         //もしキーワードが入力されている場合
         if (!empty($userSearch)) {

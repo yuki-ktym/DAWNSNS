@@ -3,52 +3,80 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class FollowsController extends Controller
 {
     //フォローリスト
     public function followList()
     {
-        return view('follows.followList');
+        $followImage = DB::table('users')
+            ->join('follows', 'follows.follow', '=', 'users.id')
+            ->where('follows.follower', Auth::id())
+            ->select('images')
+            ->get();
+
+        $followPost = DB::table('users')
+            ->join('follows', 'follows.follow', '=', 'users.id')
+            ->join('posts', 'posts.user_id', '=', 'users.id')
+            ->where('follows.follower', Auth::id())
+            ->select('posts.*', 'users.images', 'users.username')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('follows.followList', [
+            'followImage' => $followImage,
+            'followPost' => $followPost
+        ]);
     }
     //フォロワーリスト
     public function followerList()
     {
-        return view('follows.followerList');
+        $followerImage = DB::table('users')
+            ->join('follows', 'follows.follower', '=', 'users.id')
+            ->where('follows.follow', Auth::id())
+            ->select('images')
+            ->get();
+
+        $followerPost = DB::table('users')
+            ->join('follows', 'follows.follower', '=', 'users.id')
+            ->join('posts', 'posts.user_id', '=', 'users.id')
+            ->where('follows.follow', Auth::id())
+            ->select('posts.*', 'users.images', 'users.username')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+
+        return view('follows.followerList', [
+            'followerImage' => $followerImage,
+            'followerPost' => $followerPost
+
+        ]);
     }
 
-    // フォローする
+    // フォローする(データベースに送る値を一意にしたい！！！)
     public function followUs($id)
     {
-        \DB::table('follows')
-            ->insert(['follow' => $id, 'follower' => Auth::id()]);
-            return redirect('/search');
-        }
+        DB::table('follows')
+            ->insert(['follower' => Auth::id(), 'follow' => $id]);
+        return redirect('/search');
+    }
 
     // フォローを外す
     public function unFollow($id)
     {
-        return back('');
+        DB::table('follows')
+            ->where('follower', Auth::id())
+            ->where('follow', $id)
+            ->delete();
+        return redirect('/search');
     }
 
-    // ログイン中のIDがフォローしているIDの数を表示
-    // ログイン中のIDがフォローされている数を表示
-    // public function followCount(){
-    //     $id=Auth::id();
-    //     $followCount=\DB::table('follows')
-    //     ->where('follow',$id)->count();
-    //     $followerCount=\DB::table('follows')
-    //     ->where('follower',$id)->count();
-
-    //     return view('posts.index',['followCount'=>$followCount,'followerCount'=>$followerCount]);
-    // }
-
-
-    // // ログアウト
-    //     public function Logout(Request $request){
-    //         Auth::logout();
-    //         return redirect('login');
-    //     }
+    // ユーザープロフィール、投稿一覧
+    public function userProfileList()
+    {
+    }
 
 }

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 // Requestクラスとrequestインスタンスについて、上記useを使用している（Requestクラスとrequestインスタンス）
@@ -13,7 +14,7 @@ class PostsController extends Controller
 
     public function index(){
         $user = Auth::user();
-        $postlist = \DB::table('posts')
+        $postlist = DB::table('posts')
         ->join('users','posts.user_id','=','users.id')
         ->select('posts.*','users.images','users.username')
         ->where('user_id',Auth::id())
@@ -31,7 +32,7 @@ class PostsController extends Controller
 
     public function create(Request $request){
         $tweet = $request->input('tweet');
-        \DB::table('posts')->insert([
+        DB::table('posts')->insert([
             'posts' => $tweet,
             'user_id' => Auth::id(),
         ]);
@@ -42,7 +43,7 @@ class PostsController extends Controller
     public function update(Request $request){
         $post=$request->input('upDate');
         $id = $request->input('id');
-        \DB::table('posts')
+        DB::table('posts')
             ->where('id', $id)
             ->update([
                 'posts' => $post,
@@ -54,7 +55,7 @@ class PostsController extends Controller
     // 指定のIDを削除する処理
     public function delete($id){
         // ここの$idはルートパラメータと言って、ルートの定義と関係しています！
-        \DB::table('posts')
+        DB::table('posts')
         // データベースのpostsテーブルへ接続している
             ->where('id', $id)
             // 指定する（postsテーブルのidと,フォームから送られてきたIDが一致する箇所の投稿内容を変更する）

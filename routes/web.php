@@ -29,37 +29,40 @@ Route::post('/register', 'Auth\RegisterController@register');
 Route::get('/added', 'Auth\RegisterController@added');
 
 // ログアウト
-Route::get('/logout','Auth\LoginController@logout');
+Route::get('/logout', 'Auth\LoginController@logout');
 
 // 新規登録????
-Route::get('auth/register','Auth\RegisterController@showRegistrationForm');
-Route::post('auth/register','Auth\RegisterController@register');
+Route::get('auth/register', 'Auth\RegisterController@showRegistrationForm');
+Route::post('auth/register', 'Auth\RegisterController@register');
 
 
 //◆◆◆ログイン中のページ◆◆◆
-Route::get('/top','PostsController@index');
+Route::get('/top', 'PostsController@index');
 
 // (作成中)プロフィール
-Route::get('/profile','UsersController@profile');
-Route::post('/update-u','UsersController@update');
+Route::get('/profile', 'UsersController@profile');
+Route::post('/update-u', 'UsersController@update');
 
-Route::get('{id}/profile','UsersController@update');
-Route::post('{id}/profile','UsersController@update');
+Route::get('{id}/profile', 'UsersController@update');
+Route::post('{id}/profile', 'UsersController@update');
 
 
-// (未完成)フォローリスト
-Route::get('/followList','FollowsController@followList');
-// (未完成)フォロワーリスト
-Route::get('/followerList','FollowsController@followerList');
-// フォローフォロワーカウント(ビューに直接入力した)
-// Route::get('/login','FollowsController@followCount');
+// フォローリスト
+Route::get('/followList', 'FollowsController@followList');
+// フォロワーリスト
+Route::get('/followerList', 'FollowsController@followerList');
+
+// ユーザープロフィール
+Route::get('/userProfile','FollowsController@userProfileList');
+
 
 
 // 検索
-Route::get('/search','UsersController@search');
-Route::post('/search','UsersController@search');
-// 検索※画像取得
-
+Route::get('/search', 'UsersController@search');
+Route::post('/search', 'UsersController@search');
+// フォローする,フォローを解除
+Route::get('follows/{id}/followUs', 'FollowsController@followUs');
+Route::get('follows/{id}/unFollow', 'FollowsController@unFollow');
 
 // 投稿
 Route::get('/create', 'PostsController@create');
@@ -70,9 +73,3 @@ Route::post('/update', 'PostsController@update');
 // 投稿削除
 Route::get('{id}/delete', 'PostsController@delete');
 Route::post('/delete', 'PostsController@delete');
-
-
-
-
-
-
