@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="ページの内容を表す文章" />
     <title></title>
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{{asset('css/reset.css')}}">
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="js/style.js"></script>
+    <script src="{{asset('js/style.js')}}"></script>
     <!--スマホ,タブレット対応-->
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <!--サイトのアイコン指定-->
@@ -25,10 +25,10 @@
 <body>
     <header>
         <div id = "head">
-        <h1><a href="/top"><img src="images/logo.png"></a></h1>
+        <h1><a href="/top"><img src="{{asset('images/main_logo.png')}}"></a></h1>
 
                 <div id="image">
-                    <p><img src="images/arrow.png"><?php $user=Auth::user();?>{{ $user->username }}さん</p>
+                    <p><?php $user=Auth::user();?>{{ $user->username }}さん<img src="{{asset('images/'.$user->images)}}"></p>
                 </div>
 <!-- メニューボックス -->
                 <nav class="menu-box">

@@ -4,10 +4,9 @@
 <h1>Follow list</h1>
 @foreach($followImage as $followImage)
 <tr>
-    <td><a href="/userProfile"><img src="images/{{$followImage->images}}" alt="followImage"></a></td>
+    <td><a href="/follows/{{$followImage->follow}}/userProfile"><img src="images/{{$followImage->images}}" alt="followImage"></a></td>
 </tr>
 @endforeach
-
 <div>
     <table>
         @foreach($followPost as $followPost)

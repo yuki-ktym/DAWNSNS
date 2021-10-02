@@ -15,7 +15,7 @@ class FollowsController extends Controller
         $followImage = DB::table('users')
             ->join('follows', 'follows.follow', '=', 'users.id')
             ->where('follows.follower', Auth::id())
-            ->select('images')
+            // ->select('images','id')　指定しなければ全部指定できている？（10月2日に質問）オールにする？
             ->get();
 
         $followPost = DB::table('users')
@@ -37,7 +37,7 @@ class FollowsController extends Controller
         $followerImage = DB::table('users')
             ->join('follows', 'follows.follower', '=', 'users.id')
             ->where('follows.follow', Auth::id())
-            ->select('images')
+            // ->select('images')　指定しなければ全部指定できている？（10月2日に質問）オールにする？
             ->get();
 
         $followerPost = DB::table('users')
@@ -60,7 +60,10 @@ class FollowsController extends Controller
     public function followUs($id)
     {
         DB::table('follows')
-            ->insert(['follower' => Auth::id(), 'follow' => $id]);
+            ->insert([
+                'follower' => Auth::id(),
+                'follow' => $id
+            ]);
         return redirect('/search');
     }
 
@@ -74,9 +77,23 @@ class FollowsController extends Controller
         return redirect('/search');
     }
 
-    // ユーザープロフィール、投稿一覧
-    public function userProfileList()
+    public function userProfileList($id)
     {
-    }
+        $userProfile = DB::table('users')
+            ->where('id', $id)
+            ->first();
 
+        $postList = DB::table('posts')
+            ->join('users', 'posts.user_id', '=', 'users.id')
+            ->select('posts.*', 'users.images', 'users.username')
+            ->where('user_id', $id)
+            ->orderBy('created_at', 'desc')
+            ->get();
+        // dd($postList);
+
+        return view('follows.userProfile', [
+            'userProfile' => $userProfile,
+            'postList' => $postList
+        ]);
+    }
 }

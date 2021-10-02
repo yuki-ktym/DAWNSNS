@@ -158,6 +158,10 @@ class UsersController extends Controller
         $userSearch = $request->input('userSearch');
         // データベース接続
         $user = DB::table('users');
+        $followC=DB::table('follows')
+        ->where('follower',Auth::id())
+        ->get()
+        ->toArray();
 
         //もしキーワードが入力されている場合
         if (!empty($userSearch)) {
@@ -172,7 +176,7 @@ class UsersController extends Controller
 
         return view(
             'users.search',
-            ['person' => $person]
+            ['person' => $person,'followC'=>$followC]
         );
     }
 }

@@ -1,11 +1,10 @@
 @extends('layouts.login')
 
 @section('content')
-
 <h1>Follower list</h1>
 @foreach($followerImage as $followerImage)
 <tr>
-    <td><a href="/userProfile"><img src="images/{{$followerImage->images}}" alt="followerImage"></a></td>
+    <td><a href="/follows/{{$followerImage->follower}}/userProfile"><img src="images/{{$followerImage->images}}" alt="followerImage"></a></td>
 </tr>
 @endforeach
 <div>

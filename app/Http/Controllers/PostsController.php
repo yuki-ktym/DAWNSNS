@@ -13,15 +13,19 @@ class PostsController extends Controller
 {
 
     public function index(){
-        $user = Auth::user();
-        $postlist = DB::table('posts')
-        ->join('users','posts.user_id','=','users.id')
-        ->select('posts.*','users.images','users.username')
-        ->where('user_id',Auth::id())
+// フォローユーザーの投稿を追加　①質問（10月2日）解決
+// if文で編集削除ボタンをログイン中のユーザーのみにする
+        $postList = DB::table('users')
+        ->join('follows', 'follows.follow', '=', 'users.id')
+        ->join('posts', 'posts.user_id', '=', 'users.id')
+        ->where('follows.follower', Auth::id())
+        ->orWhere('posts.user_id',Auth::id())
+        ->select('posts.*', 'users.images', 'users.username')
+        ->orderBy('created_at', 'desc')
         ->get();
+
         return view('posts.index',[
-            'user'=>$user,
-            'postlist'=>$postlist
+            'postList'=>$postList,
         ]);
     }
     // joinメソッドの第一引数は結合したいテーブル名（初期値にpostsを指定しているので、ここではusersを指定）
@@ -39,7 +43,6 @@ class PostsController extends Controller
         return redirect('/top');
     }
 
-    // 未完成(https://readouble.com/laravel/5.7/ja/queries.html#:~:text=%E3%81%A6%E3%81%8F%E3%81%A0%E3%81%95%E3%81%84%E3%80%82-,UPDATE,-%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9%E3%81%B8%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89)
     public function update(Request $request){
         $post=$request->input('upDate');
         $id = $request->input('id');
@@ -52,17 +55,12 @@ class PostsController extends Controller
         return redirect('/top');
     }
 
-    // 指定のIDを削除する処理
     public function delete($id){
         // ここの$idはルートパラメータと言って、ルートの定義と関係しています！
         DB::table('posts')
-        // データベースのpostsテーブルへ接続している
             ->where('id', $id)
-            // 指定する（postsテーブルのidと,フォームから送られてきたIDが一致する箇所の投稿内容を変更する）
             ->delete();
-            // 削除する命令ーーー
         return redirect('/top');
-        // topへ遷移ーーー
     }
 
 }
