@@ -1,24 +1,154 @@
 @charset "utf-8";
+
 html{
 }
 body{
+
 }
 /* header */
 header{
+  z-index: 3; /*重ね順を変更*/
     background:#3C4767;
+    margin-top: auto;
+    height: 75px;
 }
 
-/* main content */
+/* メニュー*/
+
+.rightMenu{
+  z-index: 3; /*重ね順を変更*/
+  display: flex;
+}
+
+
+.imgLogo{
+  opacity: 0.8;
+  width: 140px;
+	height: 70px;
+  position: absolute;
+left: 30px;
+}
+
+.menuContent{
+  position: absolute;
+  right: 150px;
+  top: 30px;
+}
+
+.menuUsername{
+  z-index: 2; /*重ね順を変更*/
+color: white;
+}
+.menu-box a{
+  color: white;
+}
+
+.menuImage{
+  z-index: 2; /*重ね順を変更*/
+  width: 50px;
+	height: 50px;
+	border-radius: 50px;
+  position: relative;
+  left: 150px;
+  bottom: 53px;
+
+}
+
+/* ハンバーガーメニュー */
+li{
+  list-style-type: none;
+}
+
+.menu-box{
+  z-index: 1; /*重ね順を変更*/
+  position: fixed; /*表示位置を固定*/
+  top: 0; /*表示位置を指定*/
+  right: 0px; /*表示位置を指定*/
+  background:white; /*背景をグレーにする*/
+  border: solid;
+  text-align: center; /*テキストを中央揃え*/
+  color: #000; /*文字色を黒にする*/
+  width: 243px; /*全幅表示*/
+  height: 277px;
+  margin: 0 auto;
+  padding: 50px 0;
+  transition: all 0.6s; /*アニメーションの時間を指定*/
+  transform: translateY(-100%); /*ナビを上に隠す*/
+
+}
+
+.menu-box ul li{
+  font-size: 20px;
+  list-style-type: none;
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+
+}
+
+.menu-box ul li a{
+  display: block; /*クリックできる領域を広げる*/
+  color: #000;
+  padding: 20px 0;
+  text-decoration: none;
+}
+
+.menu-box.active{
+  transform: translateY(0%);
+}
+
+.menu-trigger {
+  z-index: 2; /*重ね順を変更*/
+  cursor: pointer;
+  /* z-index: 3; */
+  width: 20px;
+	height: 20px;
+  position:relative;
+  bottom: 15px;
+  left: 110px;
+}
+
+.menu-trigger span {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-top: solid 2px white;
+  border-right: solid 2px white;
+  transform: rotate(135deg); 
+  transition: .35s ease-in-out;			/*変化の速度を指定*/
+}
+.menu-trigger span:nth-child(1) {
+  top: 0;
+}
+
+/* 選択された時のスタイルを指定 */
+.menu-trigger.active span:nth-child(1) {
+  top: 18px;
+  transform: rotate(-45deg);
+}
+
+
+
+
+
+/*ボディ要素*/
+/* 全体 */
 #row{
     display: flex;
     flex-flow: row wrap;
+    max-width: 1280px;
 }
+
 #container{
     flex: 0 0 80%;
 }
+/* サイドバー */
 #side-bar{
     flex: 0 0 19%;
     border-left: 1px solid #6C6C6C;
+}
+
+.confirm{
+  border-bottom: 1px solid #6C6C6C;
 }
 
 /* モーダルウィンドウ */
@@ -66,4 +196,73 @@ header{
     color: #00afcc;
     background-color: #e4e0e1;
     transition: 0.6s;
+  }
+
+
+  /* アイコン */
+.iconImage{
+	width: 50px;
+	height: 50px;
+	border-radius: 50px;
+}
+
+  /* 投稿 */
+.upContainer{
+  display: block;
+  height: 80;
+  border-bottom: 8px #666666;
+}
+
+tr{
+  display: block;
+  width: 1000px;
+  height: 120px;
+  border-bottom: 1px solid;
+  padding: 10px 10px 10px 10px ;
+}
+
+textarea {
+  width: 820px;
+  height: 10em;
+
+  }
+  .iconI{
+    position:relative;
+    top: 5px;
+    left: 20px;
+  }
+
+  .nameI{
+    position:relative;
+    left: 40px;
+    bottom: 25px;
+  }
+
+  .postI{
+    position:relative;
+    top: 5px;
+    right: 20px;
+  }
+
+  .createdI{
+    position:relative;
+    left: 500px;
+    bottom: 25px;
+  }
+
+  .modalopen{
+    position:relative;
+    top: 55px;
+    left: 480px;
+  }
+
+  .btn{
+    position:relative;
+    top: 55px;
+    left: 500px;
+  }
+
+  .iconImageG{
+    width: 45px;
+    height: 45px;
   }

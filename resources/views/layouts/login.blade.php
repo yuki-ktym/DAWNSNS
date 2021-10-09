@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="utf-8" />
+    <meta charset="utf-8" />
     <!--IEブラウザ対策-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="ページの内容を表す文章" />
@@ -22,53 +23,76 @@
     <link rel="apple-touch-icon-precomposed" href="画像のURL" />
     <!--OGPタグ/twitterカード-->
 </head>
+
+
 <body>
+
     <header>
-        <div id = "head">
-        <h1><a href="/top"><img src="{{asset('images/main_logo.png')}}"></a></h1>
-
-                <div id="image">
-                    <p><?php $user=Auth::user();?>{{ $user->username }}さん<img src="{{asset('images/'.$user->images)}}"></p>
-                </div>
-<!-- メニューボックス -->
-                <nav class="menu-box">
-                    <p class="menu-btn">ボタン設定</p>
-                <ul>
-                    <li><a href="/top">ホーム</a></li>
-                    <li><a href="/profile">プロフィール編集</a></li>
-                    <li><a href="/logout">ログアウト</a></li>
-                </ul>
-                </nav>
-
+        <div class="rightMenu">
+            <a href="/top"><img class="imgLogo" href="" src="{{asset('images/main_logo.png')}}"></a>
+        </div>
     </header>
+
+
+    <div class="menuContent">
+        <p class="menuUsername"><?php $user = Auth::user(); ?>{{ $user->username }}さん</p>
+
+
+        <!-- ハンバーガーメニュー -->
+        <nav class="menu-box">
+            <ul class="menu">
+                <li class="menu-item"><a href="/top">ホーム</a></li>
+                <li class="menu-item"><a href="/profile">プロフィール編集</a></li>
+                <li class="menu-item"><a href="/logout">ログアウト</a></li>
+            </ul>
+        </nav>
+
+        <div class="menu-trigger">
+            <span></span>
+        </div>
+
+        <img class="menuImage" src="{{asset('images/'.$user->images)}}">
+
+
+    </div>
+
+
+
+
     <div id="row">
         <div id="container">
 
             @yield('content')
-<!--親-->
-        </div >
-        <div id="side-bar">
-            <div id="confirm">
-                <p><?php $user=Auth::user();?><img src="images/arrow.png">{{ $user->username }}さんの</p>
-                <div>
-                <p>フォロー数</p>
-                <p><?php $id = \Auth::id(); $followerCount=\DB::table('follows')->where('follower',$id)->count(); ?>{{ $followerCount }}名</p>
-                <!-- フォロー数が表示できない -->
-                </div>
-                <p class="btn"><a href="/followList">フォローリスト</a></p>
-                <div>
-                <p>フォロワー数</p>
-                <p><?php $id = \Auth::id(); $followCount=\DB::table('follows')->where('follow',$id)->count(); ?>{{ $followCount }}名</p>
-                <!-- フォロワー数が表示できない、直接記述すると表示される↑ -->
-                </div>
-                <p class="btn"><a href="/followerList">フォロワーリスト</a></p>
-            </div>
-            <p class="btn"><a href="/search">ユーザー検索</a></p>
+            <!--親-->
         </div>
+
+        <div id="side-bar">
+
+            <div class="confirm">
+                <p><?php $user = Auth::user(); ?>{{ $user->username }}さんの</p>
+                <div>
+                    <p>フォロー数</p>
+                    <p><?php $id = \Auth::id();
+                        $followerCount = \DB::table('follows')->where('follower', $id)->count(); ?>{{ $followerCount }}名</p>
+                    <p class=""><a href="/followList">フォローリスト</a></p>
+                </div>
+                <div>
+                    <p>フォロワー数</p>
+                    <p><?php $id = \Auth::id();
+                        $followCount = \DB::table('follows')->where('follow', $id)->count(); ?>{{ $followCount }}名</p>
+                    <p class=""><a href="/followerList">フォロワーリスト</a></p>
+                </div>
+            </div>
+
+            <p class="userBtn"><a href="/search">ユーザー検索</a></p>
+        </div>
+
     </div>
+
     <footer>
     </footer>
     <script src="JavaScriptファイルのURL"></script>
     <script src="JavaScriptファイルのURL"></script>
 </body>
+
 </html>

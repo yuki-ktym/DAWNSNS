@@ -2,27 +2,25 @@
 
 @section('content')
 
-
-<div class="container">
+<div class="upContainer">
   {!! Form::open(['url' => '/create']) !!}
   {!! Form::textarea('text',null,['required','class'=>'form-control','placeholder' => '何をつぶやこうか...?']) !!}
   {!! Form::image('images/post.png') !!}
   {!! Form::close() !!}
-  <!-- 2,オプションの内容、入力必須、クラス設定、初期表示テキスト -->
 </div>
 
 
-<div>
+<div class="postTable">
   <table>
     @foreach ($postList as $postList)
     <tr>
-      <td><img src="images/{{$postList->images}}" alt="No Image"></td>
-      <td>{{$postList->username}}</td>
-      <td>{{$postList->posts}}</td>
-      <td>{{$postList->created_at}}</td>
+      <td class="iconI"><img class="iconImage" src="images/{{$postList->images}}" alt="No Image"></td>
+      <td class="nameI">{{$postList->username}}</td>
+      <td class="postI">{{$postList->posts}}</td>
+      <td class="createdI">{{$postList->created_at}}</td>
       @if(Auth::id() == $postList->user_id)
-      <td><a class="modalopen" href="{{$postList->id}}" data-target="modal{{$postList->id}}"><img src="images/edit.png" alt=""></a></td>
-      <td><a class="btn btn-danger" href="/{{$postList->id}}/delete" onclick="return confirm('本当に投稿を削除してもよろしいでしょうか？')"><img src="images/trash_h.png" alt=""></a></td>
+      <td><a class="modalopen" href="{{$postList->id}}" data-target="modal{{$postList->id}}"><img class="iconImageG" src="images/edit.png" alt=""></a></td>
+      <td><a class="btn btn-danger" href="/{{$postList->id}}/delete" onclick="return confirm('本当に投稿を削除してもよろしいでしょうか？')"><img class="iconImageG" src="images/trash_h.png" alt=""></a></td>
       @endif
     </tr>
     <!-- モーダル機能を追加する -->

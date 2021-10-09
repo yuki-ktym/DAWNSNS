@@ -2,13 +2,20 @@
 
 @section('content')
 
-<div id="clear">
-<p>{{Session('username')}}さん、</p>
-<p>ようこそ！DAWNSNSへ！</p>
-<p>ユーザー登録が完了しました。</p>
-<p>さっそく、ログインをしてみましょう。</p>
+<div class="addedPage">
+    <div class="textAdded">
+        <div class="addedUp">
+            <p class="text">{{Session('username')}}さん、</p>
+            <p class="text">ようこそ！DAWNSNSへ！</p>
+        </div>
+        <div class="addedDown">
+            <p class="text">ユーザー登録が完了しました。</p>
+            <p class="text">さっそく、ログインをしてみましょう</p>
+        </div>
 
-<p class="btn"><a href="/login">ログイン画面へ</a></p>
+    </div>
+    <p class="LoRtn"><a class="loginBtn" href="/login">ログイン画面へ</a></p>
+
 </div>
 
 @endsection

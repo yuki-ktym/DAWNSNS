@@ -14,7 +14,7 @@
 <table>
  @foreach ($person as $person)
  <tr>
-     <td><img src="images/{{$person->images}}"></td>
+     <td><img class="iconImage" src="images/{{$person->images}}"></td>
     <td>{{$person->username}}</td>
     @if(in_array($person->id,array_column($followC,'follow')))
     <td><button><a href="/follows/{{$person->id}}/unFollow" class="unFollows-btn">フォローをはずす</a></button></td>
