@@ -47,6 +47,11 @@ return [
             'driver' => 'local',
             'root'   => public_path(),
         ],
+        // 画像アップロードの記述
+        // public_path関数は、publicディレクトリの完全パスを返します。
+        // さらに、publicディレクトリ中の指定ファイルへの完全パスを生成することもできます。
+        // ストレージディスクを作成
+        // ローカルに保存するための関数だと認識
 
         'local' => [
             'driver' => 'local',
@@ -56,7 +61,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
         ],
 

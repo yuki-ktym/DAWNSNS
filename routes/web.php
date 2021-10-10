@@ -29,7 +29,7 @@ Route::get('/added', 'Auth\RegisterController@added');
 // ログアウト
 Route::get('/logout', 'Auth\LoginController@logout');
 // 新規登録
-Route::get('auth/register', 'Auth\RegisterController@showRegistrationForm');
+// Route::get('auth/register', 'Auth\RegisterController@showRegistrationForm');
 Route::post('auth/register', 'Auth\RegisterController@register');
 
 

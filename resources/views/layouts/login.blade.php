@@ -70,21 +70,21 @@
 
             <div class="confirm">
                 <p><?php $user = Auth::user(); ?>{{ $user->username }}さんの</p>
-                <div>
+                <div class="followCount">
                     <p>フォロー数</p>
                     <p><?php $id = \Auth::id();
                         $followerCount = \DB::table('follows')->where('follower', $id)->count(); ?>{{ $followerCount }}名</p>
-                    <p class=""><a href="/followList">フォローリスト</a></p>
+                    <p class="followBtn"><a class="followBtnFont" href="/followList">フォローリスト</a></p>
                 </div>
-                <div>
+                <div class="followCount">
                     <p>フォロワー数</p>
                     <p><?php $id = \Auth::id();
                         $followCount = \DB::table('follows')->where('follow', $id)->count(); ?>{{ $followCount }}名</p>
-                    <p class=""><a href="/followerList">フォロワーリスト</a></p>
+                    <p class="followerBtn"><a class="followerBtnFont" href="/followerList">フォロワーリスト</a></p>
                 </div>
             </div>
 
-            <p class="userBtn"><a href="/search">ユーザー検索</a></p>
+            <p class="userSearchBtn"><a class="userSearchBtnFont" href="/search">ユーザー検索</a></p>
         </div>
 
     </div>

@@ -3,7 +3,6 @@
 html{
 }
 body{
-
 }
 /* header */
 header{
@@ -60,22 +59,29 @@ li{
 }
 
 .menu-box{
-  z-index: 1; /*重ね順を変更*/
+  /* z-index: 1; 重ね順を変更 */
   position: fixed; /*表示位置を固定*/
-  top: 0; /*表示位置を指定*/
+  top: 74px; /*表示位置を指定*/
   right: 0px; /*表示位置を指定*/
   background:white; /*背景をグレーにする*/
-  border: solid;
+  border: solid 2px;
   text-align: center; /*テキストを中央揃え*/
-  color: #000; /*文字色を黒にする*/
+  color: #707070; /*文字色を黒にする*/
   width: 243px; /*全幅表示*/
   height: 277px;
   margin: 0 auto;
   padding: 50px 0;
-  transition: all 0.6s; /*アニメーションの時間を指定*/
-  transform: translateY(-100%); /*ナビを上に隠す*/
 
+  /* transition: all 0.5s; 変化を加えなくては効かない */
+  /*transform: translateY(-100%); */
+  /* 上からずらさず表示するか非表示にするかで分岐する方法に変更 */
+  display:none;
 }
+
+/* .menu-box.active{
+  transform: translateY(0%);
+} */
+
 
 .menu-box ul li{
   font-size: 20px;
@@ -87,15 +93,17 @@ li{
 
 .menu-box ul li a{
   display: block; /*クリックできる領域を広げる*/
-  color: #000;
+  color: gray;
   padding: 20px 0;
   text-decoration: none;
 }
 
-.menu-box.active{
-  transform: translateY(0%);
+li.menu-item:hover{
+	background-color: #E2563B;
+  color: white;
 }
 
+/* トリガー */
 .menu-trigger {
   z-index: 2; /*重ね順を変更*/
   cursor: pointer;
@@ -113,19 +121,30 @@ li{
   height: 12px;
   border-top: solid 2px white;
   border-right: solid 2px white;
-  transform: rotate(135deg); 
-  transition: .35s ease-in-out;			/*変化の速度を指定*/
+  transform: rotate(135deg);
+  transition: 0.20s ease-in-out;			/*変化の速度を指定*/
 }
-.menu-trigger span:nth-child(1) {
-  top: 0;
-}
+
 
 /* 選択された時のスタイルを指定 */
 .menu-trigger.active span:nth-child(1) {
   top: 18px;
   transform: rotate(-45deg);
+
 }
 
+
+
+
+/* フォローリスト */
+.listIcon{
+  display: block;
+  width: 1000px;
+  height: 120px;
+  border-bottom: 5px solid #D7D7D7;
+  padding: 10px 10px 10px 10px ;
+
+}
 
 
 
@@ -141,6 +160,8 @@ li{
 #container{
     flex: 0 0 80%;
 }
+
+
 /* サイドバー */
 #side-bar{
     flex: 0 0 19%;
@@ -150,6 +171,62 @@ li{
 .confirm{
   border-bottom: 1px solid #6C6C6C;
 }
+
+.followCount{
+  width: 240px;
+  height: 75px;
+}
+
+.followCount p{
+  display: inline-block;
+}
+
+.followBtn{
+  background-color: #3C4767;
+  width: 138px;
+  height: 43px;
+  border-radius: 5px;
+}
+.followBtnFont{
+  text-decoration: none;
+  color: white;
+  padding: 5px 5px 5px 5px;
+  position:relative;
+  top: 12px;
+  left: 8px;
+
+}
+.followerBtn{
+  background-color: #3C4767;
+  width: 138px;
+  height: 43px;
+  border-radius: 5px;
+}
+.followerBtnFont{
+  text-decoration: none;
+  color: white;
+  position:relative;
+  top: 12px;
+  left: 5px;
+
+}
+.userSearchBtn{
+  background-color: #3C4767;
+  width: 138px;
+  height: 43px;
+  border-radius: 5px;
+}
+
+.userSearchBtnFont{
+  text-decoration: none;
+  color: white;
+  position:relative;
+  top: 12px;
+  left: 5px;
+}
+
+
+
 
 /* モーダルウィンドウ */
 /* 要修正 */
@@ -184,18 +261,15 @@ li{
   }
 
   .modalClose{
-    display: inline-block;
-    padding: 5px 10px;
-    background-color: #00afcc;
-    font-size: 1.0rem;
-    color: #fff;
-    text-decoration: none;
+    position:relative;
+    top: 0px;
+    left: 397px;
   }
 
-  .modalClose:hover{
-    color: #00afcc;
-    background-color: #e4e0e1;
-    transition: 0.6s;
+  .modalCloseImage{
+    width: 50px;
+    height: 50px;
+    
   }
 
 
@@ -217,12 +291,12 @@ tr{
   display: block;
   width: 1000px;
   height: 120px;
-  border-bottom: 1px solid;
+  border-bottom: 1px solid #D7D7D7;
   padding: 10px 10px 10px 10px ;
 }
 
 textarea {
-  width: 820px;
+  width: 900px;
   height: 10em;
 
   }
@@ -266,3 +340,31 @@ textarea {
     width: 45px;
     height: 45px;
   }
+
+/* プロフィール */
+.profileIcon{
+  position:relative;
+  top: 100px;
+  right:  30px;
+
+}
+
+.profileContainer{
+  width: 200px;
+  height: 400px;
+  position:relative;
+  top: 30px;
+  left: 55px;
+
+}
+.cousinBtn{
+  position:relative;
+  top: 30px;
+  left: 120px;
+  background-color: #7B9979;
+  width: 80px;
+  height: 40px;
+  border-radius: 10px;
+ font-size: 16px;
+ color: white;
+}

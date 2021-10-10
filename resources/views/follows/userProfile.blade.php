@@ -3,7 +3,7 @@
 @section('content')
 
 <tr>
-    <td><img src="{{asset('images/'.$userProfile->images)}}" alt="followImage"></td>
+    <td><img class="iconImage" src="{{asset('images/'.$userProfile->images)}}" alt="followImage"></td>
     <td class="NameBio">
         <div>
             <p>Name<nobr>{{$userProfile->username}}</nobr>
@@ -21,13 +21,15 @@
 <table>
     @foreach($postList as $postList)
     <tr>
-        <td><a href=""><img src="{{asset('images/'.$postList->images)}}" alt="followImage"></a></td>
-        <td>{{$postList->username}}</td>
-        <td>{{$postList->posts}}</td>
-        <td>{{$postList->created_at}}</td>
+        <td class="iconI"><a href=""><img class="iconImage" src="{{asset('images/'.$postList->images)}}" alt="followImage"></a></td>
+        <td class="nameI">{{$postList->username}}</td>
+        <td class="postI">{{$postList->posts}}</td>
+        <td class="createdI">{{$postList->created_at}}</td>
     </tr>
 
     @endforeach
 </table>
 
 @endsection
+
+

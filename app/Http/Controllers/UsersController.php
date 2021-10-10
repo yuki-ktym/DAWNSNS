@@ -70,8 +70,10 @@ class UsersController extends Controller
                     ->withInput();
             } else {
                 $fileName = $file->getClientOriginalName();
+                // 画像ファイルの名前を抽出
                 $file->storeAs('images', $fileName, 'public_uploads');
-                // ↑↑↑引数(フォルダパス名、ファイル名、ディスク名)↑↑↑画像を任意の名前をつけて保存
+                // ↑↑↑storeAsはファイル名の指定、引数(フォルダパス名※保存先、ファイル名、ディスク名※fileSystemsに定義)↑↑↑画像を任意の名前をつけて保存
+                // ファイルを保存する関数
                 DB::table('users')
                     ->where('id', $id)
                     ->update([
@@ -158,6 +160,7 @@ class UsersController extends Controller
         $userSearch = $request->input('userSearch');
         // データベース接続
         $user = DB::table('users');
+
         $followC=DB::table('follows')
         ->where('follower',Auth::id())
         ->get()

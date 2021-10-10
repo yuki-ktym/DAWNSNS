@@ -6,6 +6,7 @@
     <div class="textAdded">
         <div class="addedUp">
             <p class="text">{{Session('username')}}さん、</p>
+            <!-- サーバーに一時的保存先 -->
             <p class="text">ようこそ！DAWNSNSへ！</p>
         </div>
         <div class="addedDown">

@@ -104,13 +104,12 @@ class RegisterController extends Controller
         }
 
         return view('auth.register');
-
+// 表示するのに必要
     }
 
     public function added(){
         return view('auth.added');
     }
 }
-
 
 

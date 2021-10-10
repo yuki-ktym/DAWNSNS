@@ -12,17 +12,17 @@
 <h1>検索結果</h1>
 @if(isset($person))
 <table>
- @foreach ($person as $person)
- <tr>
-     <td><img class="iconImage" src="images/{{$person->images}}"></td>
-    <td>{{$person->username}}</td>
-    @if(in_array($person->id,array_column($followC,'follow')))
-    <td><button><a href="/follows/{{$person->id}}/unFollow" class="unFollows-btn">フォローをはずす</a></button></td>
-    @else
-    <td><button><a href="/follows/{{$person->id}}/followUs" class="follows-btn">フォローする</a></button></td>
-    @endif
-</tr>
-@endforeach
+    @foreach ($person as $person)
+    <tr>
+        <td class="iconI"><img class="iconImage" src="images/{{$person->images}}"></td>
+        <td class="nameI">{{$person->username}}</td>
+        @if(in_array($person->id,array_column($followC,'follow')))
+        <td><button><a href="/follows/{{$person->id}}/unFollow" class="unFollows-btn">フォローをはずす</a></button></td>
+        @else
+        <td><button><a href="/follows/{{$person->id}}/followUs" class="follows-btn">フォローする</a></button></td>
+        @endif
+    </tr>
+    @endforeach
 </table>
 @endif
 

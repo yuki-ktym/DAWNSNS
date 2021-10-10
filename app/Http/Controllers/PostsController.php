@@ -17,9 +17,13 @@ class PostsController extends Controller
 // if文で編集削除ボタンをログイン中のユーザーのみにする
         $postList = DB::table('users')
         ->join('follows', 'follows.follow', '=', 'users.id')
+        // フォローした人とユーザーIDを一致
         ->join('posts', 'posts.user_id', '=', 'users.id')
+        // 投稿のIDとユーザーIDを一致させています。
         ->where('follows.follower', Auth::id())
+        // ログインしているユーザーがフォローしている人を一致
         ->orWhere('posts.user_id',Auth::id())
+        // ログインしているユーザーのフォローの投稿のIDを一致
         ->select('posts.*', 'users.images', 'users.username')
         ->orderBy('created_at', 'desc')
         ->get();
@@ -56,7 +60,7 @@ class PostsController extends Controller
     }
 
     public function delete($id){
-        // ここの$idはルートパラメータと言って、ルートの定義と関係しています！
+        // ここの$idはルートパラメータと言って、ルートの定義と関係しています
         DB::table('posts')
             ->where('id', $id)
             ->delete();

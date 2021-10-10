@@ -40,6 +40,8 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+    // 初期処理、middlewareがゲストだった場合の処理
+    // except、指定した主キーを持たないモデルをすべて返します。
 
     public function login(Request $request){
         if($request->isMethod('post')){
@@ -49,6 +51,7 @@ class LoginController extends Controller
             if(Auth::attempt($data)){
                 return redirect('/top');
             }
+            // attemptはデータベースからユーザーを見つける役割。その後TOPへ遷移
         }
         return view("auth.login");
     }
@@ -58,6 +61,7 @@ class LoginController extends Controller
         $this->performLogout($request);
         return redirect('/login');// ここを好きな遷移先に変更する。
     }
-    // ログアウトするとエラー、更新するとTOPに遷移する、なぜ？修正できる？
+    // logout時の遷移先も AuthenticatesUsers で定義されてしまっているので
+// LoginController を上記の様に修正して無理やり遷移先を変更する。
 
 }
