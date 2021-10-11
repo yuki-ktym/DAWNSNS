@@ -25,6 +25,7 @@ class PostsController extends Controller
         ->orWhere('posts.user_id',Auth::id())
         // ログインしているユーザーのフォローの投稿のIDを一致
         ->select('posts.*', 'users.images', 'users.username')
+        ->groupBy('id')
         ->orderBy('created_at', 'desc')
         ->get();
 
