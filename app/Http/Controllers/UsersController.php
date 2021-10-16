@@ -165,8 +165,9 @@ class UsersController extends Controller
         ->where('follower',Auth::id())
         ->get()
         ->toArray();
+        // 配列に変換
 
-        //もしキーワードが入力されている場合
+        //もしキーワードが入力されている場合　emptyは、変数が空であるかどうかを検査する
         if (!empty($userSearch)) {
             $person = $user->where('username', 'LIKE', '%' . $userSearch . '%')
                 ->get();

@@ -16,7 +16,7 @@
     <tr>
         <td class="iconI"><img class="iconImage" src="images/{{$person->images}}"></td>
         <td class="nameI">{{$person->username}}</td>
-        @if(in_array($person->id,array_column($followC,'follow')))
+        @if(in_array($person->id,array_column($followC,'follow')))　　<!--★ 配列に選択されているIDが、ログインされているユーザーフォローが一致したら表示する-->
         <td><button><a href="/follows/{{$person->id}}/unFollow" class="unFollows-btn">フォローをはずす</a></button></td>
         @else
         <td><button><a href="/follows/{{$person->id}}/followUs" class="follows-btn">フォローする</a></button></td>
@@ -27,6 +27,10 @@
 @endif
 
 @endsection
+
+<!-- in_array — 配列に値があるかチェックする -->
+<!-- array_column — 入力配列から単一のカラムの値を返す -->
+<!-- データベースの配列の中に選択した条件のユーザーがあれば下の記述を表示して、elseでそうでなければフォローボタンを表示している -->
 
 <!-- 何も検索していない時は全員出す
 検索された場合は曖昧検索でSQLを用いて行う

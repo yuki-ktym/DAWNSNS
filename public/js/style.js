@@ -28,15 +28,17 @@ $(function () {
 $(function () {
 
   $('.menu-trigger').click(function () { //メニューボタンをクリックしたら
-    $(this).toggleClass('active'); //指定したCSSクラスが要素に無ければ追加する、ボタンを回すため。※toggleClassあれば削除する
+    $(this).toggleClass('active'); //指定したCSSクラスが要素に無ければ追加する、ボタンを回すため。※toggleClass、もう一度押すと削除される（elseがきく）
     $('.menu-box').css('display', 'block');//「.menu-box」にdisplay blockが付与され表示される
     // ifを使って条件分岐、active要素があれば、if
-    if ($(this).hasClass('active')) { //もしもう一回クリックされたら、クリックした要素(menu-trigger)に「.active」要素があれば（hasClass）
+    if ($(this).hasClass('active')) { //もしクリックしたら、クリックした要素(menu-trigger)に「.active」要素があれば（hasClass）
       // $('.menu-box').addClass('active');　 //「.active」要素を付与する、 いらない？
     } else {
       // $('.menu-box').removeClass('active'); //「.active」要素を外す
-      $('.menu-box').css('display', 'none'); //display noneを付与。
+      $('.menu-box').css('display', 'none'); //display noneを付与。メニューを非表示にする
     }
     return false;
   });
 });
+
+
