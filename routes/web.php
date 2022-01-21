@@ -38,8 +38,7 @@ Route::post('auth/register', 'Auth\RegisterController@register');
 // TOP投稿一覧
 Route::get('/top', 'PostsController@index');
 // 新規投稿
-Route::get('/create', 'PostsController@create');
-Route::post('/create', 'PostsController@create');
+Route::get('/create', 'PostsController@create')->name('create.post');
 // 投稿編集（ルートパラメータでid指定しています！）
 Route::get('{id}/update', 'PostsController@update');
 Route::post('/update', 'PostsController@update');
@@ -59,7 +58,7 @@ Route::get('/followList', 'FollowsController@followList');
 // フォロワーリスト
 Route::get('/followerList', 'FollowsController@followerList');
 // ユーザープロフィール
-Route::get('/userProfile','FollowsController@userProfileList');
+Route::get('/userProfile', 'FollowsController@userProfileList');
 // ユーザープロフィールにIDをのせて遷移（idのURLno仕組み要確認）
 Route::get('follows/{id}/userProfile', 'FollowsController@userProfileList');
 
@@ -69,4 +68,3 @@ Route::post('/search', 'UsersController@search');
 // フォローする,フォローを解除
 Route::get('follows/{id}/followUs', 'FollowsController@followUs');
 Route::get('follows/{id}/unFollow', 'FollowsController@unFollow');
-
