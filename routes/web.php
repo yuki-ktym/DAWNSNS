@@ -21,9 +21,9 @@
 
 
 //◆◆◆ログアウト中のページ◆◆◆
-Route::get('/login', 'Auth\LoginController@login');
+// Route::get('/login', 'Auth\LoginController@login');
 Route::post('/login', 'Auth\LoginController@login');
-Route::get('/register', 'Auth\RegisterController@register');
+// Route::get('/register', 'Auth\RegisterController@register');
 Route::post('/register', 'Auth\RegisterController@register');
 Route::get('/added', 'Auth\RegisterController@added');
 // ログアウト
@@ -66,5 +66,5 @@ Route::get('follows/{id}/userProfile', 'FollowsController@userProfileList');
 Route::get('/search', 'UsersController@search');
 Route::post('/search', 'UsersController@search');
 // フォローする,フォローを解除
-Route::get('follows/{id}/followUs', 'FollowsController@followUs');
+Route::get('follows/{id}/follows', 'FollowsController@followUs');
 Route::get('follows/{id}/unFollow', 'FollowsController@unFollow');
